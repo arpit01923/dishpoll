@@ -1,0 +1,65 @@
+.tab-header {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.tab-header .btn {
+  margin: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.primary {
+  border: none;
+  margin-right: 1rem;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.secondary {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.tab-container{
+    display: flex;
+    width: 100%;
+}
+
+/* Card */
+.vertical-card {
+  border: 1px solid black;
+  width: 15rem;
+  height: 18rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.vertical-card .name {
+  height: 10%;
+  margin-top: 0;
+}
+
+.vertical-card .image {
+  width: 100%;
+  height: 60%;
+}
+
+.vertical-card .description {
+  height: 3rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.vertical-card .btn {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  height: 2rem;
+  border-radius: 5px;
+}
+
