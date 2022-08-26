@@ -1,7 +1,9 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import "./home.css";
 
 export const Home = () => {
+  const [dishesData, setDishesData] = useState([]);
   const [toggleTabs, setToggleTabs] = useState({ tab1: true, tab2: false });
 
   const tab1Handler = () => {
@@ -11,6 +13,16 @@ export const Home = () => {
   const tab2Handler = () => {
     setToggleTabs((prev) => ({ ...prev, tab1: false, tab2: true }));
   };
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get(
+        "https://raw.githubusercontent.com/syook/react-dishpoll/main/db.json"
+      );
+      console.log(response);
+      setDishesData(response.data);
+    })();
+  }, []);
 
   return (
     <main>
@@ -30,59 +42,28 @@ export const Home = () => {
       </header>
       {toggleTabs.tab1 && (
         <section className="tab-container">
-          <section className="vertical-card">
-            <h3 className="name">name</h3>
-            <img
-              src="https://loremflickr.com/300/300/food"
-              alt="product-img"
-              className="image"
-            />
-            <p className="description">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-              modi odio ut vero labore nesciunt quos saepe voluptatum tempora
-              quasi sapiente enim officiis expedita, veritatis dicta laborum
-              ratione, doloribus alias.
-            </p>
-            <button className="btn primary">Vote</button>
-            <button className="btn secondary">Unvote</button>
-          </section>
-
-          <section className="vertical-card">
-            <h3 className="name">name</h3>
-            <img
-              src="https://loremflickr.com/300/300/food"
-              alt="product-img"
-              className="image"
-            />
-            <p className="description">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-              modi odio ut vero labore nesciunt quos saepe voluptatum tempora
-              quasi sapiente enim officiis expedita, veritatis dicta laborum
-              ratione, doloribus alias.
-            </p>
-            <button className="btn primary">Vote</button>
-            <button className="btn secondary">Unvote</button>
-          </section>
+          {dishesData.map(({ id, dishName, description, image }) => (
+            <section className="vertical-card" key={id}>
+              <h3 className="name">{dishName}</h3>
+              <img src={image} alt="product-img" className="image" />
+              <p className="description">{description}</p>
+              <button className="btn primary">Vote</button>
+              <button className="btn secondary">Unvote</button>
+            </section>
+          ))}
         </section>
       )}
       {toggleTabs.tab2 && (
         <section className="tab-container">
-          <section className="vertical-card">
-            <h3 className="name">name</h3>
-            <img
-              src="https://loremflickr.com/300/300/food"
-              alt="product-img"
-              className="image"
-            />
-            <p className="description">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-              modi odio ut vero labore nesciunt quos saepe voluptatum tempora
-              quasi sapiente enim officiis expedita, veritatis dicta laborum
-              ratione, doloribus alias.
-            </p>
-            {/* <button className="btn primary">Vote</button>
-            <button className="btn secondary">Unvote</button> */}
-          </section>
+          {dishesData.map(({ id, dishName, description, image }) => (
+            <section className="vertical-card" key={id}>
+              <h3 className="name">{dishName}</h3>
+              <img src={image} alt="product-img" className="image" />
+              <p className="description">{description}</p>
+              {/* <button className="btn primary">Vote</button>
+              <button className="btn secondary">Unvote</button> */}
+            </section>
+          ))}
         </section>
       )}
     </main>
